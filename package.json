@@ -1,0 +1,22 @@
+{
+  "name": "mofron-event-resize",
+  "version": "0.0.1",
+  "description": "resize event for mofron",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simpart/mofron-event-resize.git"
+  },
+  "keywords": [
+    "mofron"
+  ],
+  "author": "simparts",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/simpart/mofron-event-resize/issues"
+  },
+  "homepage": "https://github.com/simpart/mofron-event-resize#readme"
+}
