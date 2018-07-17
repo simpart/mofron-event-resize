@@ -9,16 +9,12 @@
  */
 mofron.event.Resize = class extends mofron.Event {
     
-    constructor (fnc, prm) {
+    constructor (po, p2) {
         try {
             super();
             this.name('Resize');
-            
-            if ('object' === fnc) {
-                this.prmOpt(fnc);
-            } else {
-                this.handler(fnc, prm);
-            }
+            this.prmOpt(po, p2);
+            this.m_init_flg = true;
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -28,23 +24,41 @@ mofron.event.Resize = class extends mofron.Event {
     /**
      * add resize event to target component.
      */
-    eventConts (tgt_dom) {
+    contents (tgt_dom) {
         try {
-            var evt_func = this.handler();
-            tgt_dom.getRawDom().addEventListener(
-                'resize',
-                () => {
+            let rsiz = this;
+            const rsiz_obs = new ResizeObserver(
+                (ent) => {
                     try {
-                        if (null != evt_func[0]) {
-                            evt_func[0](evt_func[1]);
+                        if (true === rsiz.isInit()) {
+                            return;
+                        }
+                        for (let eidx in ent) {
+                            if (tgt_dom.attr("id") === ent[eidx].target.getAttribute('id')) {
+                                rsiz.handler()[0](rsiz.handler()[1]);
+                            }
                         }
                     } catch (e) {
                         console.error(e.stack);
                         throw e;
                     }
-                },
-                false
+                }
             );
+
+            rsiz_obs.observe(tgt_dom.getRawDom());
+        } catch (e) {
+            console.error(e.stack);
+            throw e;
+        }
+    }
+    
+    isInit () {
+        try {
+            if (true === this.m_init_flg) {
+                this.m_init_flg = false;
+                return true;
+            }
+            return this.m_init_flg;
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -52,3 +66,4 @@ mofron.event.Resize = class extends mofron.Event {
     }
 }
 module.exports = mofron.event.Resize;
+/* end of file */
