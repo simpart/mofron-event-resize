@@ -13,8 +13,8 @@ mofron.event.Resize = class extends mofron.Event {
         try {
             super();
             this.name('Resize');
+            this.prmMap('handler', 'handlerPrm');
             this.prmOpt(po, p2);
-            this.m_init_flg = true;
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -54,7 +54,7 @@ mofron.event.Resize = class extends mofron.Event {
     
     isInit () {
         try {
-            if (true === this.m_init_flg) {
+            if (undefined === this.m_init_flg) {
                 this.m_init_flg = false;
                 return true;
             }
