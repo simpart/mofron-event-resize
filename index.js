@@ -2,19 +2,19 @@
  * @file mofron-event-resize/index.js
  * @author simpart
  */
-
+const mf = require('mofron');
 /**
  * @class mofron.event.Resize
  * @brief resize event class for component
  */
-mofron.event.Resize = class extends mofron.Event {
+mf.event.Resize = class extends mf.Event {
     
-    constructor (po, p2) {
+    constructor (po) {
         try {
             super();
             this.name('Resize');
-            this.prmMap('handler', 'handlerPrm');
-            this.prmOpt(po, p2);
+            this.prmMap('handler');
+            this.prmOpt(po);
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -35,7 +35,7 @@ mofron.event.Resize = class extends mofron.Event {
                         }
                         for (let eidx in ent) {
                             if (tgt_dom.attr("id") === ent[eidx].target.getAttribute('id')) {
-                                rsiz.handler()[0](rsiz.handler()[1]);
+                                rsiz.execHandler();
                             }
                         }
                     } catch (e) {
@@ -65,5 +65,5 @@ mofron.event.Resize = class extends mofron.Event {
         }
     }
 }
-module.exports = mofron.event.Resize;
+module.exports = mf.event.Resize;
 /* end of file */
